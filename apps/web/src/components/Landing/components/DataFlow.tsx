@@ -10,7 +10,7 @@ export default function DataFlow() {
       <motion.div
         animate={{ y: [0, 300, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
-        className="absolute w-3 h-3 bg-blue-400 rounded-full"
+        className="absolute h-3 w-3 rounded-full bg-primary-glow shadow-[0_0_24px_color-mix(in_oklab,var(--primary-glow)_55%,transparent)]"
       />
 
       {/* LAYERS */}
@@ -21,16 +21,16 @@ export default function DataFlow() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.3 }}
-            className="glass p-4 rounded-xl absolute w-56 glow"
+            className="glass glow absolute w-56 rounded-xl border border-border/70 p-4"
             style={{
               top: `${i * 120}px`,
               left: `${i % 2 === 0 ? "20%" : "50%"}`,
             }}
           >
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-text-secondary">
               Layer {i + 1}
             </p>
-            <h3 className="text-lg">{layer}</h3>
+            <h3 className="text-lg text-text-primary">{layer}</h3>
           </motion.div>
         )
       )}

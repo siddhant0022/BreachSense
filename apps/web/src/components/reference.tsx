@@ -92,24 +92,24 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="text-secondary min-h-screen bg-[#080808] font-sans">
+    <div className="min-h-screen bg-background font-sans text-text-secondary">
       {/* Global ambient glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="bg-primary/5 absolute top-[-15%] left-[-10%] h-[50%] w-[50%] rounded-full blur-[160px]" />
-        <div className="absolute right-[-10%] bottom-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/[0.04] blur-[140px]" />
+        <div className="absolute right-[-10%] bottom-[-10%] h-[40%] w-[40%] rounded-full bg-primary-glow/6 blur-[140px]" />
       </div>
 
       <div className="relative flex min-h-screen">
         {/* ── Sidebar ──────────────────────────────────────────────────────── */}
-        <aside className="flex w-[200px] shrink-0 flex-col border-r border-white/6 bg-[#070707]">
+        <aside className="flex w-[200px] shrink-0 flex-col border-r border-border/70 bg-surface">
           {/* Workspace badge */}
-          <div className="flex items-center gap-3 border-b border-white/6 px-4 py-5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05]">
+          <div className="flex items-center gap-3 border-b border-border/70 px-4 py-5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/80">
               <LayoutDashboard size={14} className="text-primary/60" />
             </div>
             <div>
-              <p className="text-[12px] font-semibold text-white">Workspace</p>
-              <p className="text-[10px] text-white/30">Personal</p>
+              <p className="text-[12px] font-semibold text-text-primary">Workspace</p>
+              <p className="text-[10px] text-text-muted">Personal</p>
             </div>
           </div>
 
@@ -122,14 +122,14 @@ export default function DashboardPage() {
                 className={cn(
                   "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-medium transition-all",
                   active === item.id
-                    ? "bg-white/[0.06] text-white"
-                    : "text-white/35 hover:bg-white/[0.03] hover:text-white/60"
+                    ? "bg-surface text-text-primary"
+                    : "text-text-muted hover:bg-surface/80 hover:text-text-secondary"
                 )}
               >
                 <item.icon
                   size={15}
                   className={
-                    active === item.id ? "text-primary" : "text-white/30"
+                    active === item.id ? "text-primary" : "text-text-muted"
                   }
                 />
                 {item.label}
@@ -138,16 +138,16 @@ export default function DashboardPage() {
           </nav>
 
           {/* Bottom items */}
-          <div className="space-y-0.5 border-t border-white/6 px-2 py-4">
+          <div className="space-y-0.5 border-t border-border/70 px-2 py-4">
             {[
               { label: "Documentation", icon: FileText },
               { label: "Support", icon: HelpCircle },
             ].map((item) => (
               <button
                 key={item.label}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/25 transition-all hover:bg-white/[0.03] hover:text-white/50"
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-medium text-text-muted transition-all hover:bg-surface/80 hover:text-text-secondary"
               >
-                <item.icon size={14} className="text-white/20" />
+                <item.icon size={14} className="text-text-muted" />
                 {item.label}
               </button>
             ))}
@@ -156,7 +156,7 @@ export default function DashboardPage() {
           {/* New Project */}
           <div className="px-3 pb-4">
             <Link to="/test">
-              <button className="border-primary/20 bg-primary/[0.08] text-primary/70 hover:bg-primary/[0.14] hover:text-primary flex w-full items-center justify-center gap-2 rounded-xl border py-2.5 text-[11px] font-bold tracking-[0.18em] uppercase transition-all">
+              <button className="flex w-full items-center justify-center gap-2 rounded-xl border border-primary/25 bg-primary/12 py-2.5 text-[11px] font-bold tracking-[0.18em] text-primary uppercase transition-all hover:bg-primary/18">
                 <Plus size={12} /> New Assessment
               </button>
             </Link>
@@ -166,11 +166,11 @@ export default function DashboardPage() {
         {/* ── Main ─────────────────────────────────────────────────────────── */}
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Top bar */}
-          <header className="flex items-center justify-between border-b border-white/6 bg-[#070707]/80 px-6 py-3 backdrop-blur-xl">
+          <header className="flex items-center justify-between border-b border-border/70 bg-surface/90 px-6 py-3 backdrop-blur-xl">
             {/* Brand */}
             <Link
               to="/"
-              className="text-lg font-bold tracking-tight text-white"
+              className="text-lg font-bold tracking-tight text-text-primary"
             >
               Ami<span className="text-primary">worthy</span>
             </Link>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
               {["Assessments", "Signals", "Growth"].map((n) => (
                 <button
                   key={n}
-                  className="text-[13px] text-white/40 transition-colors hover:text-white"
+                  className="text-[13px] text-text-muted transition-colors hover:text-text-primary"
                 >
                   {n}
                 </button>
@@ -189,23 +189,23 @@ export default function DashboardPage() {
 
             {/* Right actions */}
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2">
-                <Search size={13} className="text-white/30" />
+              <div className="flex items-center gap-3 rounded-xl border border-border bg-surface/80 px-3 py-2">
+                <Search size={13} className="text-text-muted" />
                 <input
                   placeholder="Search data..."
-                  className="w-32 bg-transparent text-[12px] text-white/50 placeholder:text-white/20 focus:outline-none"
+                  className="w-32 bg-transparent text-[12px] text-text-secondary placeholder:text-text-muted focus:outline-none"
                 />
               </div>
-              <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.03] text-white/30 transition-colors hover:border-white/15">
+              <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/80 text-text-muted transition-colors hover:border-primary/25 hover:text-text-primary">
                 <Bell size={14} />
               </button>
-              <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 bg-white/[0.03] text-white/30 transition-colors hover:border-white/15">
+              <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/80 text-text-muted transition-colors hover:border-primary/25 hover:text-text-primary">
                 <Settings size={14} />
               </button>
               <button
                 onClick={handleSignOut}
                 title="Sign out"
-                className="bg-primary/10 text-primary hover:bg-primary/20 flex h-8 w-8 items-center justify-center rounded-lg border border-white/8 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-primary/25 bg-primary/12 text-primary transition-colors hover:bg-primary/20"
               >
                 <LogOut size={13} />
               </button>

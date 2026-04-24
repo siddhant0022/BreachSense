@@ -11,11 +11,11 @@ export function ToggleMode() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={`px-3 py-1 rounded-full text-xs transition ${
         isDark
-          ? "bg-primary/20 text-primary"
-          : "bg-foreground/10 text-foreground"
+          ? "border border-primary/25 bg-primary/12 text-primary"
+          : "border border-border bg-surface/80 text-text-secondary"
       }`}
     >
-      {isDark ? "Dark Mode" : "Light Mode"}
+      {isDark ? "Dark Locked" : "Theme Sync"}
     </button>
   );
 }

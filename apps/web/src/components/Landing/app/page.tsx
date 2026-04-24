@@ -6,7 +6,7 @@ import Footer from "@/components/Landing/components/Footer";
 
 export default function LandingHomePage() {
   return (
-    <main className="landing-shell relative min-h-svh bg-background text-foreground">
+    <main className="landing-shell relative min-h-svh bg-background text-text-primary">
       <div className="pointer-events-none fixed inset-0 grid-bg opacity-40" />
 
       <Navbar />

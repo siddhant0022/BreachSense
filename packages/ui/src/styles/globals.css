@@ -1,22 +1,129 @@
+@config "../../../tailwind.config.ts";
 @import "tailwindcss";
 
-body {
-  background: #05070A;
+@theme {
+  --font-sans: "Sora", "Space Grotesk", sans-serif;
+
+  --color-background: #05070A;
+  --color-surface: #0B0F14;
+  --color-primary: #3B82F6;
+  --color-primary-glow: #22D3EE;
+  --color-accent: #8B5CF6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-text-primary: #E5E7EB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+
+  --color-foreground: #E5E7EB;
+  --color-border: color-mix(in oklab, #9CA3AF 18%, transparent);
+  --color-card: #0B0F14;
+  --color-card-foreground: #E5E7EB;
+  --color-popover: #0B0F14;
+  --color-popover-foreground: #E5E7EB;
+  --color-muted: color-mix(in oklab, #0B0F14 82%, #9CA3AF 18%);
+  --color-muted-foreground: #9CA3AF;
+  --color-input: color-mix(in oklab, #0B0F14 88%, #9CA3AF 12%);
+  --color-ring: #22D3EE;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #E5E7EB;
+  --color-primary-foreground: #05070A;
+  --color-accent-foreground: #E5E7EB;
 }
 
-.grid-bg {
-  background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
+:root,
+.dark,
+.light {
+  color-scheme: dark;
+  --background: #05070A;
+  --surface: #0B0F14;
+  --primary: #3B82F6;
+  --primary-glow: #22D3EE;
+  --accent: #8B5CF6;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --foreground: var(--text-primary);
+  --border: color-mix(in oklab, var(--text-secondary) 18%, transparent);
+  --card: var(--surface);
+  --card-foreground: var(--text-primary);
+  --popover: color-mix(in oklab, var(--surface) 94%, var(--background) 6%);
+  --popover-foreground: var(--text-primary);
+  --muted: color-mix(in oklab, var(--surface) 84%, var(--text-secondary) 16%);
+  --muted-foreground: var(--text-secondary);
+  --input: color-mix(in oklab, var(--surface) 88%, var(--text-secondary) 12%);
+  --ring: var(--primary-glow);
+  --destructive: var(--danger);
+  --destructive-foreground: var(--text-primary);
+  --primary-foreground: var(--background);
+  --accent-foreground: var(--text-primary);
+  --radius: 1rem;
 }
 
-.glass {
-  background: rgba(11, 15, 20, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.08);
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top, color-mix(in oklab, var(--primary) 12%, transparent), transparent 36%),
+      radial-gradient(circle at 85% 10%, color-mix(in oklab, var(--primary-glow) 10%, transparent), transparent 32%),
+      var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 40%, transparent);
+    color: var(--text-primary);
+  }
 }
 
-.glow {
-  box-shadow: 0 0 30px rgba(59,130,246,0.15);
+@layer components {
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--text-secondary) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--text-secondary) 10%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .glass {
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--surface) 90%, transparent), color-mix(in oklab, var(--surface) 76%, transparent));
+    backdrop-filter: blur(24px);
+    border: 1px solid color-mix(in oklab, var(--text-secondary) 16%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, var(--text-primary) 8%, transparent),
+      0 24px 64px color-mix(in oklab, black 45%, transparent);
+  }
+
+  .glow {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--primary) 10%, transparent),
+      0 0 36px color-mix(in oklab, var(--primary) 14%, transparent),
+      0 0 84px color-mix(in oklab, var(--primary-glow) 10%, transparent);
+  }
+
+  .theme-shell {
+    background:
+      radial-gradient(circle at 15% 20%, color-mix(in oklab, var(--primary-glow) 12%, transparent), transparent 36%),
+      radial-gradient(circle at 85% 0%, color-mix(in oklab, var(--primary) 16%, transparent), transparent 34%),
+      var(--background);
+  }
 }

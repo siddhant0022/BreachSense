@@ -56,8 +56,11 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
   }
 
   return (
-    <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">Create Account</h1>
+    <div className="glass glow mx-auto mt-10 w-full max-w-md border border-border/70 p-6">
+      <h1 className="mb-2 text-center text-3xl font-bold text-text-primary">Create Account</h1>
+      <p className="mb-6 text-center text-sm text-text-secondary">
+        Spin up your BreachSense workspace in a secure dark environment.
+      </p>
 
       <form
         onSubmit={(e) => {
@@ -80,7 +83,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
                 {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-red-500">
+                  <p key={error?.message} className="text-danger">
                     {error?.message}
                   </p>
                 ))}
@@ -103,7 +106,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
                 {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-red-500">
+                  <p key={error?.message} className="text-danger">
                     {error?.message}
                   </p>
                 ))}
@@ -126,7 +129,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
                 {field.state.meta.errors.map((error) => (
-                  <p key={error?.message} className="text-red-500">
+                  <p key={error?.message} className="text-danger">
                     {error?.message}
                   </p>
                 ))}
@@ -146,11 +149,11 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
         </form.Subscribe>
       </form>
 
-      <div className="mt-4 text-center">
+      <div className="mt-4 text-center text-sm text-text-secondary">
         <Button
           variant="link"
           onClick={onSwitchToSignIn}
-          className="text-indigo-600 hover:text-indigo-800"
+          className="text-primary hover:text-primary-glow"
         >
           Already have an account? Sign In
         </Button>
