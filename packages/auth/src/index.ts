@@ -1,11 +1,11 @@
-import { createPrismaClient } from "@my-better-t-app/db";
+import prisma from "@my-better-t-app/db";
 import { env } from "@my-better-t-app/env/server";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
-export function createAuth() {
-  const prisma = createPrismaClient();
+const isProduction = env.NODE_ENV === "production";
 
+export function createAuth() {
   return betterAuth({
     database: prismaAdapter(prisma, {
       provider: "postgresql",
@@ -19,8 +19,8 @@ export function createAuth() {
     baseURL: env.BETTER_AUTH_URL,
     advanced: {
       defaultCookieAttributes: {
-        sameSite: "none",
-        secure: true,
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
         httpOnly: true,
       },
     },
