@@ -32,6 +32,16 @@ app.use(
   }),
 );
 
+app.get("/health", (c) => {
+  return c.text("OK");
+});
+
+app.get("/layers", async (c) => {
+  return c.json({
+    layers: []
+  });
+})
+
 app.get("/", (c) => {
   return c.text("OK");
 });
