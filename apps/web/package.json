@@ -31,7 +31,8 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "sonner": "^2.0.7",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "motion": "^12.38.0"
   },
   "devDependencies": {
     "@my-better-t-app/config": "workspace:*",

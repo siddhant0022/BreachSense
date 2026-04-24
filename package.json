@@ -35,6 +35,7 @@
   "dependencies": {
     "@my-better-t-app/env": "workspace:*",
     "dotenv": "catalog:",
+    "motion": "^12.38.0",
     "zod": "catalog:"
   },
   "devDependencies": {
