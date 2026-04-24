@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import DataFlow from "./DataFlow";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center px-8 pt-32">
+    <section id="home" className="relative flex min-h-screen scroll-mt-28 items-center px-8 pt-32">
       <div className="mx-auto grid w-full max-w-7xl gap-16 lg:grid-cols-2">
 
         {/* LEFT */}

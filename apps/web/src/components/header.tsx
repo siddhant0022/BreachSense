@@ -1,11 +1,19 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 
 import { ModeToggle } from "./mode-toggle";
 import UserMenu from "./user-menu";
 
 export default function Header() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  if (pathname === "/home" || pathname === "/") {
+    return null;
+  }
+
   const links = [
-    { to: "/", label: "Home" },
+    { to: "/home", label: "Home" },
     { to: "/dashboard", label: "Dashboard" },
   ] as const;
 
