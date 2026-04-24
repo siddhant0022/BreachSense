@@ -1,0 +1,22 @@
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 8%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glass {
+  background: color-mix(in oklab, var(--card) 82%, transparent);
+  backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+}
+
+.glow {
+  box-shadow: 0 0 30px color-mix(in oklab, var(--ring) 35%, transparent);
+}
+
+.landing-shell {
+  background:
+    radial-gradient(circle at 15% 20%, color-mix(in oklab, var(--ring) 18%, transparent), transparent 40%),
+    radial-gradient(circle at 85% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 35%);
+}
