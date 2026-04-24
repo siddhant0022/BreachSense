@@ -7,6 +7,7 @@ import { DashboardSidebar } from "./DashboardSidebar";
 const titles: Array<{ prefix: string; title: string; breadcrumbs: Array<{ label: string; href?: string }> }> = [
   { prefix: "/dashboard/projects/", title: "Project Detail", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Projects", href: "/dashboard/projects" }, { label: "Project" }] },
   { prefix: "/dashboard/projects", title: "Projects", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Projects" }] },
+  { prefix: "/dashboard/layers/configure", title: "Layer Configuration", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Layers", href: "/dashboard/layers" }, { label: "Configure" }] },
   { prefix: "/dashboard/layers/", title: "Layer Detail", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Layers", href: "/dashboard/layers" }, { label: "Layer" }] },
   { prefix: "/dashboard/layers", title: "Security Layers", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Layers" }] },
   { prefix: "/dashboard/implementation", title: "Implementation Guide", breadcrumbs: [{ label: "Dashboard", href: "/dashboard" }, { label: "Implementation" }] },

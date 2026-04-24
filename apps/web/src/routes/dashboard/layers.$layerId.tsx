@@ -1,5 +1,6 @@
 import { Button } from "@my-better-t-app/ui/components/button";
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Database, Settings2 } from "lucide-react";
 import { useState } from "react";
 
 import { CodeBlock } from "@/features/dashboard/components/CodeBlock";
@@ -36,13 +37,20 @@ function LayerDetailPage() {
           <>
             <SeverityBadge severity={layer.severity} />
             <HealthIndicator status={layer.healthStatus} />
+            <Link to="/dashboard/layers/configure">
+              <Button size="sm">
+                <Settings2 />
+                Configure
+              </Button>
+            </Link>
           </>
         }
       />
 
       <section className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
         <Panel className="space-y-4">
-          <SectionTitle title="Detection profile" description={`${layer.category} · ${layer.plan} plan`} />
+          <SectionTitle title="Detection profile" description={`${layer.category} - ${layer.plan} plan`} />
+          <p className="text-sm leading-7 text-text-secondary">{layer.routeUseCase}</p>
           <div className="grid gap-3 md:grid-cols-2">
             {layer.detects.map((detection) => (
               <div key={detection} className="border border-border/70 bg-background/35 px-3 py-3 text-sm text-text-secondary">
@@ -53,7 +61,7 @@ function LayerDetailPage() {
         </Panel>
 
         <Panel className="space-y-4">
-          <SectionTitle title="Controls" description="UI-only actions for future layer management." />
+          <SectionTitle title="Route controls" description="Configure this layer for route groups and reusable datasets." />
           <div className="flex items-center justify-between border border-border/70 px-3 py-3">
             <div>
               <div className="text-sm font-medium text-text-primary">Enabled state</div>
@@ -61,7 +69,34 @@ function LayerDetailPage() {
             </div>
             <ToggleSwitch checked={enabled} onChange={setEnabled} />
           </div>
-          <Button size="sm">Test Layer</Button>
+          <Link to="/dashboard/layers/configure">
+            <Button size="sm">Open Configuration</Button>
+          </Link>
+        </Panel>
+      </section>
+
+      <section className="grid gap-4 xl:grid-cols-[1fr_1fr]">
+        <Panel>
+          <SectionTitle title="Reusable datasets" description="A layer can secure four to five datasets depending on subscription limits." />
+          <div className="grid gap-3 md:grid-cols-2">
+            {layer.reusableDatasets.map((dataset) => (
+              <div key={dataset} className="flex items-start gap-2 border border-border/70 bg-background/35 px-3 py-3">
+                <Database className="mt-0.5 size-4 text-primary" />
+                <span className="text-sm text-text-secondary">{dataset}</span>
+              </div>
+            ))}
+          </div>
+        </Panel>
+
+        <Panel>
+          <SectionTitle title="Vulnerability coverage" description="Primary weakness classes evaluated before enforcement." />
+          <div className="space-y-3">
+            {layer.vulnerabilities.map((item) => (
+              <div key={item} className="border-b border-border/60 pb-3 text-sm text-text-secondary last:border-b-0 last:pb-0">
+                {item}
+              </div>
+            ))}
+          </div>
         </Panel>
       </section>
 
@@ -70,7 +105,7 @@ function LayerDetailPage() {
           <SectionTitle title="Configuration preview" description="Mock configuration that can later be backed by live layer settings." />
           <CodeBlock
             title="Layer config"
-            code={layer.configurationPreview.map((line) => `${line}`).join("\n")}
+            code={[...layer.configurationPreview, "", "setup:", ...layer.setupSteps.map((step) => `  - ${step}`)].join("\n")}
           />
         </Panel>
 

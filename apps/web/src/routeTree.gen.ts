@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SecureRouteImport } from './routes/secure'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LandingRouteImport } from './routes/landing'
 import { Route as HomeRouteImport } from './routes/home'
@@ -23,8 +24,14 @@ import { Route as DashboardApiKeysRouteImport } from './routes/dashboard/api-key
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard/analytics'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard/alerts'
 import { Route as DashboardProjectsProjectIdRouteImport } from './routes/dashboard/projects.$projectId'
+import { Route as DashboardLayersConfigureRouteImport } from './routes/dashboard/layers.configure'
 import { Route as DashboardLayersLayerIdRouteImport } from './routes/dashboard/layers.$layerId'
 
+const SecureRoute = SecureRouteImport.update({
+  id: '/secure',
+  path: '/secure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -96,6 +103,12 @@ const DashboardProjectsProjectIdRoute =
     path: '/$projectId',
     getParentRoute: () => DashboardProjectsRoute,
   } as any)
+const DashboardLayersConfigureRoute =
+  DashboardLayersConfigureRouteImport.update({
+    id: '/configure',
+    path: '/configure',
+    getParentRoute: () => DashboardLayersRoute,
+  } as any)
 const DashboardLayersLayerIdRoute = DashboardLayersLayerIdRouteImport.update({
   id: '/$layerId',
   path: '/$layerId',
@@ -107,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/landing': typeof LandingRoute
   '/login': typeof LoginRoute
+  '/secure': typeof SecureRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/api-keys': typeof DashboardApiKeysRoute
@@ -117,12 +131,14 @@ export interface FileRoutesByFullPath {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/layers/$layerId': typeof DashboardLayersLayerIdRoute
+  '/dashboard/layers/configure': typeof DashboardLayersConfigureRoute
   '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/landing': typeof LandingRoute
   '/login': typeof LoginRoute
+  '/secure': typeof SecureRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/api-keys': typeof DashboardApiKeysRoute
@@ -133,6 +149,7 @@ export interface FileRoutesByTo {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/layers/$layerId': typeof DashboardLayersLayerIdRoute
+  '/dashboard/layers/configure': typeof DashboardLayersConfigureRoute
   '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesById {
@@ -141,6 +158,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/landing': typeof LandingRoute
   '/login': typeof LoginRoute
+  '/secure': typeof SecureRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/api-keys': typeof DashboardApiKeysRoute
@@ -151,6 +169,7 @@ export interface FileRoutesById {
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/layers/$layerId': typeof DashboardLayersLayerIdRoute
+  '/dashboard/layers/configure': typeof DashboardLayersConfigureRoute
   '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +179,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/landing'
     | '/login'
+    | '/secure'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/api-keys'
@@ -170,12 +190,14 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/dashboard/'
     | '/dashboard/layers/$layerId'
+    | '/dashboard/layers/configure'
     | '/dashboard/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/home'
     | '/landing'
     | '/login'
+    | '/secure'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/api-keys'
@@ -186,6 +208,7 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/dashboard'
     | '/dashboard/layers/$layerId'
+    | '/dashboard/layers/configure'
     | '/dashboard/projects/$projectId'
   id:
     | '__root__'
@@ -193,6 +216,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/landing'
     | '/login'
+    | '/secure'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/api-keys'
@@ -203,6 +227,7 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/dashboard/'
     | '/dashboard/layers/$layerId'
+    | '/dashboard/layers/configure'
     | '/dashboard/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
@@ -211,10 +236,18 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   LandingRoute: typeof LandingRoute
   LoginRoute: typeof LoginRoute
+  SecureRoute: typeof SecureRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/secure': {
+      id: '/secure'
+      path: '/secure'
+      fullPath: '/secure'
+      preLoaderRoute: typeof SecureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -313,6 +346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardProjectsProjectIdRouteImport
       parentRoute: typeof DashboardProjectsRoute
     }
+    '/dashboard/layers/configure': {
+      id: '/dashboard/layers/configure'
+      path: '/configure'
+      fullPath: '/dashboard/layers/configure'
+      preLoaderRoute: typeof DashboardLayersConfigureRouteImport
+      parentRoute: typeof DashboardLayersRoute
+    }
     '/dashboard/layers/$layerId': {
       id: '/dashboard/layers/$layerId'
       path: '/$layerId'
@@ -325,10 +365,12 @@ declare module '@tanstack/react-router' {
 
 interface DashboardLayersRouteChildren {
   DashboardLayersLayerIdRoute: typeof DashboardLayersLayerIdRoute
+  DashboardLayersConfigureRoute: typeof DashboardLayersConfigureRoute
 }
 
 const DashboardLayersRouteChildren: DashboardLayersRouteChildren = {
   DashboardLayersLayerIdRoute: DashboardLayersLayerIdRoute,
+  DashboardLayersConfigureRoute: DashboardLayersConfigureRoute,
 }
 
 const DashboardLayersRouteWithChildren = DashboardLayersRoute._addFileChildren(
@@ -379,6 +421,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   LandingRoute: LandingRoute,
   LoginRoute: LoginRoute,
+  SecureRoute: SecureRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
