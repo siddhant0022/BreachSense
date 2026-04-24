@@ -1,7 +1,7 @@
 import { env } from "@my-better-t-app/env/server";
 import { PrismaNeon } from "@prisma/adapter-neon";
 
-import { PrismaClient } from "../prisma/generated/client";
+import { PrismaClient } from "../prisma/generated/client/client";
 
 declare global {
   // Reuse the Prisma client during local hot reloads.
