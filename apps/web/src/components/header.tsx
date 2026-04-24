@@ -8,12 +8,13 @@ export default function Header() {
     select: (state) => state.location.pathname,
   });
 
-  if (pathname === "/home" || pathname === "/") {
+  if (pathname === "/home" || pathname === "/" || pathname === "/landing") {
     return null;
   }
 
   const links = [
     { to: "/home", label: "Home" },
+    { to: "/landing", label: "Landing" },
     { to: "/dashboard", label: "Dashboard" },
   ] as const;
 
