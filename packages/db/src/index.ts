@@ -1,7 +1,7 @@
 import { env } from "@my-better-t-app/env/server";
 import { PrismaNeon } from "@prisma/adapter-neon";
 
-import { PrismaClient } from "../prisma/generated/client";
+import { PrismaClient } from "../prisma/generated/client/client";
 
 export function createPrismaClient() {
   const adapter = new PrismaNeon({
