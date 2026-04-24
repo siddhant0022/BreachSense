@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export default function LandingHomePage() {
   return (
     <main className="landing-shell relative min-h-svh bg-background text-text-primary">
-      <div className="pointer-events-none fixed inset-0 grid-bg opacity-40" />
+    <div className="pointer-events-none fixed inset-0 grid-bg opacity-40" />
 
       <Navbar />
       <motion.div
